@@ -3,13 +3,13 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-sans);background:#fef4e6;color:#3a2e1e;min-height:100vh}
 .app{max-width:900px;margin:0 auto;padding:16px}
-.logo-bar{background:#fff8ee;border:0.5px solid #e8d5b0;border-radius:20px;padding:19px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
-.logo-item{display:flex;align-items:center;gap:10px}
+.logo-bar{background:#fff8ee;border:0.5px solid #e8d5b0;border-radius:20px;padding:19px 24px;margin-bottom:20px;display:flex;align-items:center;gap:20px}
+.logo-item{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .logo-circle{width:110px;height:100px;border-radius:60%;border:2px dashed #d4a96a;background:#fff3df;display:flex;align-items:center;justify-content:center;font-size:9px;color:#b8895a;text-align:center;flex-shrink:0;overflow:hidden}
-.logo-circle img{width:150%;height:150%;object-fit:contain;object-position:center;border-radius:100%}
-.logo-name{font-size:13px;font-weight:500;color:#7a4f20;max-width:110px;line-height:1.3}
+.logo-circle img{width:200%;height:200%;object-fit:contain;object-position:center;border-radius:100%}
+.logo-name{font-size:13px;font-weight:500;color:#7a4f20;max-width:130px;line-height:1.3}
 .logo-name span{display:block;font-size:11px;font-weight:400;color:#b8895a}
-.logo-bar-title{font-size:17px;font-weight:500;color:#7a4f20;text-align:center;flex:1;padding:0 12px}
+.logo-bar-title{font-size:28px;font-weight:700;color:#c85a00;text-align:center;flex:1;padding:0 12px;font-family:'Georgia',serif;letter-spacing:1px;line-height:1.25;text-shadow:0 1px 0 #f5c88a}
 .tabs{display:flex;gap:6px;margin-bottom:20px;background:#fff8ee;padding:7px;border-radius:12px;border:0.5px solid #e8d5b0}
 .tab{flex:1;padding:10px 8px;border:0.5px solid transparent;border-radius:8px;background:transparent;cursor:pointer;font-size:13px;font-weight:500;color:#a07840;transition:all .2s}
 .tab.active{background:#fff;border-color:#e8d5b0;color:#7a4f20}
@@ -90,27 +90,102 @@ body{font-family:var(--font-sans);background:#fef4e6;color:#3a2e1e;min-height:10
 @keyframes flashGreen{0%{background:#fff}50%{background:#d4f5e2}100%{background:#fff}}
 @keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
 .slide-in{animation:slideIn .3s ease}
+/* Заголовок сверху */
+/* Заголовок сверху */
+.header-title {
+  background: #fff8ee;
+  border: 0.5px solid #e8d5b0;
+  border-radius: 20px;
+  padding: 19px 24px;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #c85a00;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+  line-height: 1.25;
+  text-shadow: 0 1px 0 #f5c88a;
+}
+
+/* Футер внизу */
+.footer {
+  background: #fff8ee;
+  border: 0.5px solid #e8d5b0;
+  border-radius: 20px;
+  padding: 30px 24px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px dashed #d4a96a;
+  background: #fff3df;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo-circle img {
+  width: 1300%;
+  height: 130%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.footer-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #7a4f20;
+}
+
+.footer-subtitle {
+  font-size: 13px;
+  color: #b8895a;
+}
+
+/* Ссылка вместо кнопки */
+.footer-link {
+  color: #e8a040;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #e8d5b0;
+  background: #fff;
+}
+
+.footer-link:hover {
+  color: #d47020;
+  border-color: #e8a040;
+  background: #fff8ee;
+  transform: translateY(-2px);
+}
 </style>
 
 <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999"></canvas>
 
 <div class="app">
-  <div class="logo-bar">
-    <div class="logo-item">
-      <div class="logo-circle">
-        <img src="images/logo1.png"> -->
-        <span>Лого 1</span>
-      </div>
-      <div class="logo-name">Агафонова Людмила<br>Блог учителя английского<span> </div>
-    </div>
-    <div class="logo-bar-title">Let's learn IRREGULAR VERBS!</div>
-    <div class="logo-item" style="flex-direction:row-reverse">
-      <div class="logo-circle">
-        <img src="images/logo2.jpg"> -->
-        <span>Лого 2</span>
-      </div>
-      <div class="logo-name" style="text-align:right">Английская всячина<br>Карточки,игры,декор<span></div>
-    </div>
+
+    <div class="logo-bar-title">Let's learn<br>Irregular Verbs!</div>
   </div>
 
   <div class="tabs">
@@ -144,6 +219,16 @@ body{font-family:var(--font-sans);background:#fef4e6;color:#3a2e1e;min-height:10
       <div id="quiz1content"></div>
     </div>
   </div>
+  <div class="footer">
+  <div class="footer-logo">
+    <div class="footer-logo-circle">
+      <img src="images/logo1.png" alt="Logo">
+    </div>
+  </div>
+     <a href="https://vk.com/agafonovamila" target="_blank" class="footer-link">
+      Агафонова Людмила — Блог учителя английского
+  </a>
+</div>
 </div>
 
 <script>
@@ -160,6 +245,18 @@ const verbs=[
   {v1:"write",v2:"wrote",v3:"written",ru:"писать",img:"write.jpg"},
   {v1:"draw",v2:"drew",v3:"drawn",ru:"рисовать",img:"draw.jpg"},
   {v1:"sing",v2:"sang",v3:"sung",ru:"петь",img:"sing.jpg"},
+  {v1:"give",v2:"gave",v3:"given",ru:"давать",img:"give.jpg"},
+  {v1:"get",v2:"got",v3:"got",ru:"получать",img:"get.jpg"},
+  {v1:"win",v2:"won",v3:"won",ru:"выигрывать",img:"win.jpg"},
+  {v1:"sit",v2:"sat",v3:"sat",ru:"сидеть",img:"sit.jpg"},
+  {v1:"speak",v2:"spoke",v3:"spoken",ru:"говорить",img:"speak.jpg"},
+  {v1:"put",v2:"put",v3:"put",ru:"класть",img:"put.jpg"},
+  {v1:"do",v2:"did",v3:"done",ru:"делать",img:"do.jpg"},
+  {v1:"wake",v2:"woke",v3:"woken",ru:"просыпаться",img:"wake.jpg"},
+  {v1:"learn",v2:"learnt",v3:"learnt",ru:"учить",img:"learn.jpg"},
+  {v1:"tell",v2:"told",v3:"told",ru:"говорить",img:"tell.jpg"},
+  {v1:"have",v2:"had",v3:"had",ru:"иметь",img:"have.jpg"},
+  {v1:"sleep",v2:"slept",v3:"slept",ru:"спать",img:"sleep.jpg"},
 ];
 
 const AC=new(window.AudioContext||window.webkitAudioContext)();
