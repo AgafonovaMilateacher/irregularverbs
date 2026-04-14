@@ -107,77 +107,26 @@ body{font-family:var(--font-sans);background:#fef4e6;color:#3a2e1e;min-height:10
   line-height: 1.25;
   text-shadow: 0 1px 0 #f5c88a;
 }
-
-/* Футер внизу */
-.footer {
-  background: #fff8ee;
-  border: 0.5px solid #e8d5b0;
-  border-radius: 20px;
-  padding: 30px 24px;
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+.footer-credit {
   text-align: center;
+  margin-top: 40px;
+  padding-bottom: 30px;
 }
 
-.footer-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.footer-logo-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px dashed #d4a96a;
-  background: #fff3df;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-logo-circle img {
-  width: 1300%;
-  height: 130%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.footer-name {
-  font-size: 16px;
-  font-weight: 600;
+.footer-link-btn {
   color: #7a4f20;
-}
-
-.footer-subtitle {
-  font-size: 13px;
-  color: #b8895a;
-}
-
-/* Ссылка вместо кнопки */
-.footer-link {
-  color: #e8a040;
-  text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
-  transition: all 0.3s;
-  display: inline-block;
+  text-decoration: none;
   padding: 8px 16px;
-  border-radius: 8px;
-  border: 1.5px solid #e8d5b0;
-  background: #fff;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-block;
 }
 
-.footer-link:hover {
-  color: #d47020;
-  border-color: #e8a040;
+.footer-link-btn:hover {
+  color: #e8a040;
   background: #fff8ee;
-  transform: translateY(-2px);
 }
 </style>
 
@@ -219,14 +168,9 @@ body{font-family:var(--font-sans);background:#fef4e6;color:#3a2e1e;min-height:10
       <div id="quiz1content"></div>
     </div>
   </div>
-  <div class="footer">
-  <div class="footer-logo">
-    <div class="footer-logo-circle">
-      <img src="images/logo1.png" alt="Logo">
-    </div>
-  </div>
-     <a href="https://vk.com/agafonovamila" target="_blank" class="footer-link">
-      Агафонова Людмила — Блог учителя английского
+  <div class="footer-credit">
+  <a href="https://vk.com/agafonovamila" target="_blank" class="footer-link-btn">
+    Сайт создан: Агафонова Людмила — Блог учителя английского
   </a>
 </div>
 </div>
