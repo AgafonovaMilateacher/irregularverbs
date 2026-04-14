@@ -1,0 +1,320 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#fef4e6;color:#3a2e1e;min-height:100vh}
+.app{max-width:900px;margin:0 auto;padding:16px}
+.logo-bar{background:#fff8ee;border:0.5px solid #e8d5b0;border-radius:20px;padding:19px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.logo-item{display:flex;align-items:center;gap:10px}
+.logo-circle{width:110px;height:100px;border-radius:60%;border:2px dashed #d4a96a;background:#fff3df;display:flex;align-items:center;justify-content:center;font-size:9px;color:#b8895a;text-align:center;flex-shrink:0;overflow:hidden}
+.logo-circle img{width:150%;height:150%;object-fit:contain;object-position:center;border-radius:100%}
+.logo-name{font-size:13px;font-weight:500;color:#7a4f20;max-width:110px;line-height:1.3}
+.logo-name span{display:block;font-size:11px;font-weight:400;color:#b8895a}
+.logo-bar-title{font-size:17px;font-weight:500;color:#7a4f20;text-align:center;flex:1;padding:0 12px}
+.tabs{display:flex;gap:6px;margin-bottom:20px;background:#fff8ee;padding:7px;border-radius:12px;border:0.5px solid #e8d5b0}
+.tab{flex:1;padding:10px 8px;border:0.5px solid transparent;border-radius:8px;background:transparent;cursor:pointer;font-size:13px;font-weight:500;color:#a07840;transition:all .2s}
+.tab.active{background:#fff;border-color:#e8d5b0;color:#7a4f20}
+.tab:hover:not(.active){background:#fff3df}
+.section{display:none}
+.section.active{display:block}
+
+/* GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px}
+.card-wrap{perspective:700px;height:195px;cursor:pointer}
+.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.card-wrap.flipped .card-inner{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;border:0.5px solid #e8d5b0}
+.card-front{background:#fff;gap:8px}
+.card-back{background:#fff8ee;transform:rotateY(180deg)}
+.card-img{width:78px;height:68px;border-radius:8px;border:0.5px solid #e8d5b0;background:#f0e4cc;display:flex;align-items:center;justify-content:center;font-size:10px;color:#b8895a;text-align:center;overflow:hidden;flex-shrink:0}
+.card-img img{width:100%;height:100%;object-fit:cover;border-radius:7px}
+.card-verb{font-size:15px;font-weight:500;color:#7a4f20;text-align:center}
+.card-forms{display:flex;flex-direction:column;gap:5px;align-items:center;width:100%}
+.form-badge{background:#fff;border:0.5px solid #e8d5b0;border-radius:6px;padding:4px 10px;font-size:13px;color:#3a2e1e;width:100%;text-align:center}
+.form-label{font-size:10px;color:#b8895a;margin-bottom:1px}
+.hint{font-size:11px;color:#c8a06a;margin-top:4px}
+
+/* SINGLE */
+.single-wrap{max-width:480px;margin:0 auto}
+.single-progress{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.single-pbar{flex:1;background:#fff;border-radius:20px;height:8px;border:0.5px solid #e8d5b0;overflow:hidden}
+.single-pfill{height:100%;background:#e8a040;border-radius:20px;transition:width .4s}
+.single-counter{font-size:13px;color:#a07840;white-space:nowrap}
+.sc-perspective{perspective:1000px;height:420px;margin-bottom:20px;cursor:pointer}
+.sc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.sc-wrap.flipped .sc-inner{transform:rotateY(180deg)}
+.sc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;border:0.5px solid #e8d5b0}
+.sc-front{background:#fff;gap:14px}
+.sc-back{background:#fff8ee;transform:rotateY(180deg);gap:10px}
+.sc-img{width:250px;height:250px;border-radius:12px;border:0.5px solid #e8d5b0;background:#f0e4cc;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b8895a;text-align:center;overflow:hidden}
+.sc-img img{width:100%;height:100%;object-fit:cover;border-radius:11px}
+.sc-verb{font-size:26px;font-weight:500;color:#7a4f20;text-align:center}
+.sc-ru{font-size:14px;color:#b8895a;text-align:center}
+.sc-hint{font-size:12px;color:#c8a06a}
+.sc-forms{width:100%;display:flex;flex-direction:column;gap:8px}
+.sc-form-row{background:#fff;border:0.5px solid #e8d5b0;border-radius:8px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center}
+.sc-form-lbl{font-size:11px;color:#b8895a}
+.sc-form-val{font-size:15px;font-weight:500;color:#3a2e1e}
+.sc-actions{display:flex;gap:12px}
+.sc-btn{flex:1;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s}
+.sc-btn.next{background:#e8a040;color:#fff}
+.sc-btn.next:hover{background:#d47020}
+.sc-btn.again{background:#fff;border:1.5px solid #e8d5b0;color:#7a4f20}
+.sc-btn.again:hover{background:#fff3df}
+.sc-done{text-align:center;padding:32px 24px;background:#fff;border-radius:18px;border:0.5px solid #e8d5b0}
+.sc-done-icon{font-size:48px;margin-bottom:12px}
+.sc-done-title{font-size:20px;font-weight:500;color:#7a4f20;margin-bottom:6px}
+.sc-done-sub{font-size:13px;color:#b8895a;margin-bottom:20px}
+
+/* QUIZ */
+.quiz-wrap{max-width:600px;margin:0 auto}
+.progress-bar{background:#fff;border-radius:20px;height:8px;border:0.5px solid #e8d5b0;margin-bottom:20px;overflow:hidden}
+.progress-fill{height:100%;background:#e8a040;border-radius:20px;transition:width .4s}
+.quiz-card{background:#fff;border-radius:16px;padding:24px;border:0.5px solid #e8d5b0;margin-bottom:16px}
+.quiz-img-wrap{width:100%;height:220px;border-radius:10px;border:0.5px solid #e8d5b0;background:#f5e8d0;display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden;font-size:13px;color:#b8895a}
+.quiz-img-wrap img{width:100%;height:100%;object-fit:contain}
+.quiz-question{font-size:15px;color:#7a4f20;margin-bottom:16px;font-weight:500;text-align:center}
+.options{display:flex;flex-direction:column;gap:10px}
+.option-btn{background:#fff8ee;border:1.5px solid #e8d5b0;border-radius:10px;padding:12px 16px;cursor:pointer;font-size:13px;color:#3a2e1e;text-align:left;transition:all .2s;line-height:1.4}
+.option-btn:hover:not(:disabled){background:#fff3df;border-color:#d4a96a}
+.option-btn.correct{background:#eafaf0;border-color:#5cb87a;color:#2a6e3a}
+.option-btn.wrong{background:#fdf0ee;border-color:#d4695a;color:#7a2e20}
+.option-btn:disabled{cursor:default}
+.result-wrap{text-align:center;padding:24px;background:#fff;border-radius:16px;border:0.5px solid #e8d5b0}
+.result-score{font-size:40px;font-weight:500;color:#7a4f20;margin:12px 0}
+.stats{display:flex;gap:12px;margin-bottom:20px}
+.stat{flex:1;background:#fff;border-radius:10px;border:0.5px solid #e8d5b0;padding:10px;text-align:center}
+.stat-val{font-size:22px;font-weight:500;color:#7a4f20}
+.stat-lbl{font-size:11px;color:#b8895a;margin-top:2px}
+.restart-btn{background:#e8a040;border:none;border-radius:10px;padding:12px 32px;font-size:14px;color:#fff;cursor:pointer;font-weight:500}
+.restart-btn:hover{background:#d47020}
+@keyframes flashGreen{0%{background:#fff}50%{background:#d4f5e2}100%{background:#fff}}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.slide-in{animation:slideIn .3s ease}
+</style>
+
+<canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999"></canvas>
+
+<div class="app">
+  <div class="logo-bar">
+    <div class="logo-item">
+      <div class="logo-circle">
+        <img src="images/logo1.png"> -->
+        <span>Лого 1</span>
+      </div>
+      <div class="logo-name">Агафонова Людмила<br>Блог учителя английского<span> </div>
+    </div>
+    <div class="logo-bar-title">Let's learn IRREGULAR VERBS!</div>
+    <div class="logo-item" style="flex-direction:row-reverse">
+      <div class="logo-circle">
+        <img src="images/logo2.jpg"> -->
+        <span>Лого 2</span>
+      </div>
+      <div class="logo-name" style="text-align:right">Английская всячина<br>Карточки,игры,декор<span></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab(0)">📚 All cards</button>
+    <button class="tab" onclick="showTab(1)">🃏 Lern irregular verbs</button>
+    <button class="tab" onclick="showTab(2)">🖼 Test yourself</button>
+  </div>
+
+  <div class="section active" id="tab0">
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+
+  <div class="section" id="tab1">
+    <div class="single-wrap">
+      <div class="single-progress">
+        <div class="single-pbar"><div class="single-pfill" id="scpb" style="width:0%"></div></div>
+        <div class="single-counter" id="sccnt">1 / 12</div>
+      </div>
+      <div id="singleArea"></div>
+    </div>
+  </div>
+
+  <div class="section" id="tab2">
+    <div class="quiz-wrap">
+      <div class="stats">
+        <div class="stat"><div class="stat-val" id="q1score">0</div><div class="stat-lbl">Right answers</div></div>
+        <div class="stat"><div class="stat-val" id="q1total">0</div><div class="stat-lbl">All</div></div>
+        <div class="stat"><div class="stat-val" id="q1streak">0</div><div class="stat-lbl">Cards</div></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="pb1" style="width:0%"></div></div>
+      <div id="quiz1content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const verbs=[
+  {v1:"go",v2:"went",v3:"gone",ru:"идти / ехать",img:"go.jpg"},
+  {v1:"come",v2:"came",v3:"come",ru:"приходить",img:"come.jpg"},
+  {v1:"see",v2:"saw",v3:"seen",ru:"видеть",img:"see.jpg"},
+  {v1:"eat",v2:"ate",v3:"eaten",ru:"есть / кушать",img:"eat.jpg"},
+  {v1:"drink",v2:"drank",v3:"drunk",ru:"пить",img:"drink.jpg"},
+  {v1:"run",v2:"ran",v3:"run",ru:"бежать",img:"run.jpg"},
+  {v1:"swim",v2:"swam",v3:"swum",ru:"плавать",img:"swim.jpg"},
+  {v1:"fly",v2:"flew",v3:"flown",ru:"летать",img:"fly.jpg"},
+  {v1:"read",v2:"read",v3:"read",ru:"читать",img:"read.jpg"},
+  {v1:"write",v2:"wrote",v3:"written",ru:"писать",img:"write.jpg"},
+  {v1:"draw",v2:"drew",v3:"drawn",ru:"рисовать",img:"draw.jpg"},
+  {v1:"sing",v2:"sang",v3:"sung",ru:"петь",img:"sing.jpg"},
+];
+
+const AC=new(window.AudioContext||window.webkitAudioContext)();
+function resumeAC(){if(AC.state==='suspended')AC.resume();}
+function playFlip(){
+  const buf=AC.createBuffer(1,AC.sampleRate*.18,AC.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++){const t=i/AC.sampleRate,e=Math.exp(-t*22);d[i]=e*(Math.random()*2-1)*.35+e*Math.sin(2*Math.PI*420*t*(1-t*4))*.4;}
+  const s=AC.createBufferSource(),g=AC.createGain();g.gain.value=.6;s.buffer=buf;s.connect(g);g.connect(AC.destination);s.start();
+}
+function playCorrect(){
+  [[523,0],[659,.12],[784,.24],[1047,.38]].forEach(([f,dl])=>{
+    const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=f;
+    const t=AC.currentTime+dl;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.22,t+.04);g.gain.exponentialRampToValueAtTime(.001,t+.28);
+    o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.3);
+  });
+}
+function playWrong(){
+  [[200,0],[180,.12]].forEach(([f,dl])=>{
+    const o=AC.createOscillator(),g=AC.createGain();o.type='sawtooth';o.frequency.value=f;
+    const t=AC.currentTime+dl;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.15,t+.03);g.gain.exponentialRampToValueAtTime(.001,t+.22);
+    o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.25);
+  });
+}
+
+const cvs=document.getElementById('confetti-canvas'),cx=cvs.getContext('2d');
+let parts=[],animId=null;
+function resizeCvs(){cvs.width=window.innerWidth;cvs.height=window.innerHeight;}
+resizeCvs();window.addEventListener('resize',resizeCvs);
+const COLS=['#e8a040','#d47020','#f5c842','#5cb87a','#4a9ede','#e06090','#a070d0','#50c8a0'];
+function spawnConfetti(x,y){
+  for(let i=0;i<90;i++){const a=Math.random()*Math.PI*2,sp=4+Math.random()*8;
+    parts.push({x:x||cvs.width/2,y:y||cvs.height*.35,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-5,
+      size:6+Math.random()*8,color:COLS[Math.floor(Math.random()*COLS.length)],
+      rot:Math.random()*360,rotV:(Math.random()-.5)*10,shape:Math.random()>.5?'rect':'circle',life:1,decay:.012+Math.random()*.008});}
+  if(!animId)animC();
+}
+function animC(){
+  cx.clearRect(0,0,cvs.width,cvs.height);parts=parts.filter(p=>p.life>0);
+  parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.25;p.vx*=.99;p.rot+=p.rotV;p.life-=p.decay;
+    cx.save();cx.globalAlpha=Math.max(0,p.life);cx.translate(p.x,p.y);cx.rotate(p.rot*Math.PI/180);cx.fillStyle=p.color;
+    if(p.shape==='rect')cx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);
+    else{cx.beginPath();cx.arc(0,0,p.size/2,0,Math.PI*2);cx.fill();}
+    cx.restore();});
+  if(parts.length>0)animId=requestAnimationFrame(animC);else{animId=null;cx.clearRect(0,0,cvs.width,cvs.height);}
+}
+
+function shuffle(a){return[...a].sort(()=>Math.random()-.5);}
+
+function buildCards(){
+  const g=document.getElementById('cardsGrid');g.innerHTML='';
+  verbs.forEach((v,i)=>{
+    const wrap=document.createElement('div');wrap.className='card-wrap';
+    wrap.innerHTML=`<div class="card-inner">
+      <div class="card-face card-front">
+        <div class="card-img" id="cimg${i}"></div>
+        <div class="card-verb">${v.v1}</div>
+        <div class="hint">Click to see 3 forms</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-forms">
+          <div><div class="form-label">V1</div><div class="form-badge">${v.v1}</div></div>
+          <div><div class="form-label">V2 — Past Simple</div><div class="form-badge">${v.v2}</div></div>
+          <div><div class="form-label">V3 — Past Participle</div><div class="form-badge">${v.v3}</div></div>
+        </div>
+        <div class="hint" style="margin-top:8px">${v.ru}</div>
+      </div>
+    </div>`;
+    wrap.addEventListener('click',()=>{resumeAC();playFlip();wrap.classList.toggle('flipped');});
+    g.appendChild(wrap);
+    const slot=document.getElementById('cimg'+i);
+    const img=document.createElement('img');img.src='images/'+v.img;img.onerror=()=>{slot.textContent='📷 '+v.v1};slot.appendChild(img);
+  });
+}
+
+let sc={order:[],idx:0,flipped:false};
+function startSingle(){sc.order=shuffle([...Array(verbs.length).keys()]);sc.idx=0;sc.flipped=false;renderSingle();}
+function renderSingle(){
+  const area=document.getElementById('singleArea');
+  if(sc.idx>=sc.order.length){
+    area.innerHTML=`<div class="sc-done"><div class="sc-done-icon">🎉</div><div class="sc-done-title">You've learnt all the cards!</div><div class="sc-done-sub">You've learnt: ${verbs.length} verbs</div><button class="restart-btn" onclick="startSingle()">One more time!</button></div>`;
+    document.getElementById('scpb').style.width='100%';
+    document.getElementById('sccnt').textContent=verbs.length+' / '+verbs.length;
+    spawnConfetti();playCorrect();return;
+  }
+  const v=verbs[sc.order[sc.idx]];
+  document.getElementById('scpb').style.width=(sc.idx/verbs.length*100)+'%';
+  document.getElementById('sccnt').textContent=(sc.idx+1)+' / '+verbs.length;
+  sc.flipped=false;
+  area.innerHTML=`<div class="sc-wrap slide-in" id="scWrap">
+    <div class="sc-perspective" id="scCard">
+      <div class="sc-inner">
+        <div class="sc-face sc-front">
+          <div class="sc-img" id="scImg"></div>
+          <div class="sc-verb">${v.v1}</div>
+          <div class="sc-ru">${v.ru}</div>
+          <div class="sc-hint">👆click to see 3 forms</div>
+        </div>
+        <div class="sc-face sc-back">
+          <div class="sc-forms">
+            <div class="sc-form-row"><span class="sc-form-lbl">V1 — Base form</span><span class="sc-form-val">${v.v1}</span></div>
+            <div class="sc-form-row"><span class="sc-form-lbl">V2 — Past Simple</span><span class="sc-form-val">${v.v2}</span></div>
+            <div class="sc-form-row"><span class="sc-form-lbl">V3 — Past Participle</span><span class="sc-form-val">${v.v3}</span></div>
+          </div>
+          <div class="sc-ru" style="margin-top:4px">${v.ru}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-actions" id="scActions" style="display:none">
+      <button class="sc-btn again" onclick="repeatCard()">🔁 Repeat</button>
+      <button class="sc-btn next" onclick="nextCard()">Next →</button>
+    </div>
+  </div>`;
+  const slot=document.getElementById('scImg');
+  const img=document.createElement('img');img.src='images/'+v.img;img.onerror=()=>{slot.textContent='📷'};slot.appendChild(img);
+  document.getElementById('scCard').addEventListener('click',()=>{
+    if(sc.flipped)return;
+    resumeAC();playFlip();sc.flipped=true;
+    document.getElementById('scWrap').classList.add('flipped');
+    document.getElementById('scActions').style.display='flex';
+  });
+}
+function nextCard(){sc.idx++;renderSingle();}
+function repeatCard(){sc.flipped=false;document.getElementById('scWrap').classList.remove('flipped');document.getElementById('scActions').style.display='none';resumeAC();playFlip();}
+
+let q1={idx:0,score:0,streak:0,total:0,order:[]};
+function startQuiz(q,n){q.order=shuffle([...Array(verbs.length).keys()]);q.idx=0;q.score=0;q.streak=0;q.total=0;updateStats(n);renderQuiz(n);}
+function updateStats(n){const q=q1;document.getElementById('q1score').textContent=q.score;document.getElementById('q1total').textContent=q.total;document.getElementById('q1streak').textContent=q.streak;document.getElementById('pb1').style.width=(q.total/verbs.length*100)+'%';}
+function makeOptions(correct){return shuffle([correct,...shuffle(verbs.filter(v=>v.v1!==correct.v1)).slice(0,2)]);}
+function renderQuiz(n){
+  const q=q1,cont=document.getElementById('quiz1content');
+  if(q.idx>=verbs.length){
+    const pct=Math.round(q.score/verbs.length*100);
+    if(pct>=80){spawnConfetti();playCorrect();}
+    cont.innerHTML=`<div class="result-wrap"><div style="font-size:32px">${pct>=80?'🏆':pct>=50?'👍':'💪'}</div><div style="font-size:16px;color:#7a4f20;margin:8px 0">Your score</div><div class="result-score">${q.score}/${verbs.length}</div><div style="font-size:13px;color:#b8895a">${pct}% Correct answers</div><button class="restart-btn" onclick="startQuiz(q1,1)">One more time</button></div>`;return;
+  }
+  const v=verbs[q.order[q.idx]],opts=makeOptions(v);
+  cont.innerHTML=`<div class="quiz-card" id="qcard1"><div class="quiz-img-wrap" id="qimg1"></div><div class="quiz-question">What are 3 forms of the verb?</div><div class="options" id="opts1"></div></div>`;
+  const slot=document.getElementById('qimg1');const img=document.createElement('img');img.src='images/'+v.img;img.onerror=()=>{slot.textContent='📷 ('+v.ru+')'};slot.appendChild(img);
+  const oDiv=document.getElementById('opts1');
+  opts.forEach(opt=>{const btn=document.createElement('button');btn.className='option-btn';btn.textContent=`${opt.v1}  —  ${opt.v2}  —  ${opt.v3}`;btn.addEventListener('click',(e)=>{resumeAC();answerQuiz(opt.v1===v.v1,e);});oDiv.appendChild(btn);});
+}
+function answerQuiz(correct,e){
+  const v=verbs[q1.order[q1.idx]];q1.total++;
+  document.querySelectorAll('#opts1 .option-btn').forEach(btn=>{btn.disabled=true;if(btn.textContent.split('  —  ')[0].trim()===v.v1)btn.classList.add('correct');else btn.classList.add('wrong');});
+  if(correct){q1.score++;q1.streak++;playCorrect();const r=e?e.target.getBoundingClientRect():null;spawnConfetti(r?r.left+r.width/2:undefined,r?r.top:undefined);const c=document.getElementById('qcard1');if(c){c.style.animation='none';c.offsetHeight;c.style.animation='flashGreen .4s ease';}}
+  else{q1.streak=0;playWrong();}
+  updateStats(1);setTimeout(()=>{q1.idx++;renderQuiz(1);},1100);
+}
+
+function showTab(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.section').forEach((s,i)=>s.classList.toggle('active',i===n));
+  if(n===1&&sc.order.length===0)startSingle();
+  if(n===2&&q1.order.length===0)startQuiz(q1,1);
+}
+
+buildCards();
+</script>
